@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos | BlackHood</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a1a2e;
+            --primary-color: #16213e;
+            --secondary-color: #0f3460;
+            --accent-color: #e94560;
+            --neon-effect: 0 0 10px rgba(233, 69, 96, 0.7);
+            --light-color: #f1f1f1;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: var(--text-light);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar Cyberpunk Style */
+        .navbar-custom {
+            background: rgba(22, 33, 62, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--accent-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: rgba(10, 15, 30, 0.95) !important;
+            padding: 10px 0;
+        }
+        
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, #fff 20%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--neon-effect);
+            letter-spacing: 1px;
+        }
+        
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--accent-color) !important;
+            font-weight: 600;
+        }
+        
+        /* Game Header with Cover */
+        .game-cover-header {
+            padding: 4rem 0;
+            margin-top: 80px;
+            background: linear-gradient(to bottom, rgba(22, 33, 62, 0.9), rgba(15, 52, 96, 0.8));
+        }
+        
+        .game-cover-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .game-cover-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 700px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .game-cover {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 4px solid var(--accent-color);
+            object-fit: contain;
+        }
+        
+        .game-title-wrapper {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+        
+        /* Game Content Section */
+        .game-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .game-features {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .game-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .game-features li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        /* Rating System */
+        .rating-container {
+            background: rgba(15, 52, 96, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .rating-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .rating-stars {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Similar Games */
+        .similar-games {
+            margin-top: 4rem;
+        }
+        
+        .similar-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--accent-color);
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(233, 69, 96, 0.3);
+        }
+        
+        .game-card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .game-card-body {
+            padding: 1.5rem;
+        }
+        
+        .game-card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer Glow */
+        .footer {
+            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            padding: 3rem 0;
+            margin-top: auto;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: var(--neon-effect);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .game-cover {
+                max-width: 600px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .game-cover {
+                max-width: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .game-cover-header {
+                margin-top: 70px;
+                padding: 2.5rem 0;
+            }
+            
+            .game-cover {
+                max-width: 100%;
+                border-width: 3px;
+            }
+            
+            .game-cover-content {
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .game-main-title {
+                font-size: 2.2rem;
+            }
+            
+            .game-cover {
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-gamepad me-2"></i>BlackHood
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Jogos.html">Jogos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Notícias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Cover Header -->
+    <section class="game-cover-header">
+        <div class="container">
+            <div class="game-cover-content">
+                <div class="game-cover-container">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj8U_oBrYVXCCbByrpLObCqqyZ43CJstVfEA5JcrjwElsS3-zIQ_RZoy7oCljBuhGdwp9KJ-dz3w605EUY7vuLL9uebvOxJ_o0-KztvO-NxHq23KvrzYPFv6lB1KLA_ecCYCu6hWTTmi12fzezJr03jyViEqXfJnT6gaNCYtbf3ed14rBc3kNo5QMlyaQ=w1200-h630-p-k-no-nu" 
+                         alt="Horizon Forbidden West" 
+                         class="game-cover">
+                </div>
+                <div class="game-title-wrapper">
+                    <h1 class="game-main-title">HORIZON FORBIDDEN WEST</h1>
+                    <p class="game-subtitle">A continuação da aclamada aventura pós-apocalíptica de Aloy</p>
+                    
+                    <div class="game-meta">
+                        <div class="game-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Lançamento: 2022</span>
+                        </div>
+                        <div class="game-meta-item">
+                            <i class="fas fa-gamepad"></i>
+                            <span>PS4 / PS5</span>
+                        </div>
+                        <div class="game-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>50+ horas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-2">4.7/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <article class="game-content">
+            <h2>Análise Completa</h2>
+            <div class="game-description">
+                <p>Horizon Forbidden West eleva tudo o que fez o primeiro jogo ser especial, entregando uma das melhores experiências de mundo aberto desta geração. Aloy retorna em uma jornada ainda mais épica através de paisagens deslumbrantes e perigosas.</p>
+                
+                <p>Para ter a melhor experiência e maior facilidade no final, é essencial aproveitar tudo que o jogo oferece:</p>
+                
+                <ul class="game-features">
+                    <li><strong>Exploração Completa:</strong> Entre nos calderões para desbloquear novas máquinas e descobrir segredos do mundo</li>
+                    <li><strong>Controle de Máquinas:</strong> Domine o sistema aprimorado para vantagens táticas em combate</li>
+                    <li><strong>Árvore de Habilidades:</strong> Desenvolva suas habilidades para combos poderosos e técnicas especiais</li>
+                    <li><strong>Preparação:</strong> Colete armadilhas, recursos e equipamentos para enfrentar desafios maiores</li>
+                    <li><strong>Missões Secundárias:</strong> Histórias ricas que valem cada minuto e recompensam com equipamentos exclusivos</li>
+                </ul>
+            </div>
+            
+            <div class="rating-container">
+                <div class="rating-title">O QUE AMAMOS:</div>
+                <p>A combinação de combate estratégico, narrativa cativante e um mundo aberto deslumbrante faz desta franquia uma das melhores experiências para fãs de RPG e ação. Os gráficos são de tirar o fôlego, especialmente na versão PS5, e a evolução de Aloy como personagem é magistral.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fas fa-plus-circle me-2" style="color: var(--accent-color);"></i>Pontos Fortes</h4>
+                    <ul class="game-features">
+                        <li>Gráficos impressionantes e design de mundo detalhado</li>
+                        <li>Sistema de combate único e altamente estratégico</li>
+                        <li>História rica com personagens memoráveis</li>
+                        <li>Melhorias significativas na jogabilidade em relação ao primeiro</li>
+                        <li>Dublagem e trilha sonora imersivas</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4><i class="fas fa-minus-circle me-2" style="color: var(--accent-color);"></i>Pontos Fracos</h4>
+                    <ul class="game-features">
+                        <li>Algumas mecânicas podem se tornar repetitivas</li>
+                        <li>Curva de aprendizado inicial pode intimidar novatos</li>
+                        <li>IA dos inimigos poderia ser mais desafiadora em dificuldades altas</li>
+                        <li>Alguns puzzles podem frustrar pelo design pouco intuitivo</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <h4><i class="fas fa-trophy me-2" style="color: var(--accent-color);"></i>Dicas Essenciais</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="game-features">
+                            <li>Invista em habilidades de sobrevivência no início</li>
+                            <li>Experimente todas as armas para encontrar seu estilo</li>
+                            <li>Não ignore as missões de personagens secundários</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="game-features">
+                            <li>Use o modo de exploração para encontrar recursos</li>
+                            <li>Atualize seu equipamento regularmente</li>
+                            <li>Aproveite o photo mode - as paisagens são incríveis!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Similar Games Section -->
+        <section class="similar-games">
+            <h3 class="similar-title">TAMBÉM RECOMENDAMOS</h3>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="game-card">
+                        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202010/0222/niMUubpU6DmQZQ1aQYJHX0wX.png" alt="Horizon Zero Dawn" class="game-card-img">
+                        <div class="game-card-body">
+                            <h5 class="game-card-title">Horizon Zero Dawn</h5>
+                            <p>O jogo original que iniciou a franquia, com uma história fascinante e mundo aberto impressionante.</p>
+                            <div class="rating-stars small">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="game-card">
+                        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xM8SK6NG00wW9Z8IROU1xSO.png" alt="God of War Ragnarök" class="game-card-img">
+                        <div class="game-card-body">
+                            <h5 class="game-card-title">God of War Ragnarök</h5>
+                            <p>Mundo semi-aberto com combate visceral e narrativa emocionante sobre a mitologia nórdica.</p>
+                            <div class="rating-stars small">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="game-card">
+                        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202008/1420/Hb6MmiVVN5uEphKZwFrhkfIV.png" alt="Ghost of Tsushima" class="game-card-img">
+                        <div class="game-card-body">
+                            <h5 class="game-card-title">Ghost of Tsushima</h5>
+                            <p>Jogo de mundo aberto ambientado no Japão feudal com combate de espadas impressionante.</p>
+                            <div class="rating-stars small">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 class="mb-4"><i class="fas fa-gamepad me-2"></i>BlackHood</h3>
+                    <p>Sua fonte definitiva para análises de jogos e cultura geek.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="mb-4">Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="Jogos.html">Jogos</a></li>
+                        <li class="mb-2"><a href="#">Reviews</a></li>
+                        <li class="mb-2"><a href="#">Notícias</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="mb-4">Categorias</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">RPG</a></li>
+                        <li class="mb-2"><a href="#">Ação/Aventura</a></li>
+                        <li class="mb-2"><a href="#">FPS</a></li>
+                        <li class="mb-2"><a href="#">Indie</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="mb-4">Contato</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i>contato@blackhood.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i>(11) 99999-9999</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4 bg-secondary">
+            
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 BlackHood. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Animation on scroll for game cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.game-card');
+            
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
