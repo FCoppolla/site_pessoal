@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>História dos Consoles | BlackHood</title>
-    <!-- Usando o mesmo CSS do seu site original -->
+    <!-- Adicionando fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Mantendo todo o CSS original */
         :root {
             --primary-dark: #1a1a2e;
             --primary-color: #16213e;
@@ -29,9 +29,11 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
         
-        /* Navbar Cyberpunk Style */
+        /* Navbar */
         .navbar-custom {
             background: rgba(22, 33, 62, 0.9) !important;
             backdrop-filter: blur(10px);
@@ -84,7 +86,7 @@
             font-weight: 600;
         }
         
-        /* Hero Section para esta página */
+        /* Hero Section */
         .page-hero {
             background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
             background-size: cover;
@@ -93,6 +95,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            margin-top: 56px; /* Compensar a navbar fixa */
         }
         
         .page-hero::before {
@@ -111,13 +114,26 @@
             text-align: center;
             padding: 0 20px;
             animation: fadeInUp 1s ease;
+            width: 100%;
         }
         
-        /* Estilos específicos para a página de consoles */
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(233, 69, 96, 0.8);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Timeline */
         .console-timeline {
             position: relative;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 40px auto;
             padding: 40px 0;
         }
         
@@ -138,6 +154,7 @@
             position: relative;
             width: 50%;
             box-sizing: border-box;
+            margin-bottom: 30px;
         }
         
         .console-era::after {
@@ -146,10 +163,11 @@
             width: 25px;
             height: 25px;
             background: var(--accent-color);
+            border: 4px solid var(--primary-color);
             border-radius: 50%;
             top: 15px;
             z-index: 1;
-            box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.3), var(--neon-effect);
+            box-shadow: var(--neon-effect);
         }
         
         .left-era {
@@ -177,11 +195,12 @@
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
         }
         
         .console-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) !important;
             border-color: var(--accent-color);
             box-shadow: 0 15px 30px rgba(233, 69, 96, 0.3);
         }
@@ -248,7 +267,38 @@
             left: 0;
         }
         
-        /* Responsividade para a timeline */
+        /* Footer */
+        .footer {
+            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            padding: 3rem 0;
+            margin-top: auto;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsividade */
         @media (max-width: 768px) {
             .console-timeline::after {
                 left: 31px;
@@ -271,9 +321,16 @@
             .right-era {
                 left: 0;
             }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
         }
         
-        /* Mantendo as outras animações e estilos do original */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -283,24 +340,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-        
-        .footer {
-            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-            padding: 3rem 0;
-            margin-top: auto;
-            position: relative;
-        }
-        
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
-            box-shadow: 0 0 10px var(--accent-color);
         }
     </style>
 </head>
@@ -312,7 +351,7 @@
             <a class="navbar-brand" href="index2.0.html">
                 <i class="fas fa-gamepad me-2"></i>BlackHood
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -321,10 +360,10 @@
                         <a class="nav-link" href="index2.0.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="consoles.html">Consoles</a>
+                        <a class="nav-link active" aria-current="page" href="consoles.html">Consoles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Jogos</a>
+                        <a class="nav-link" href="jogos.html">Jogos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Reviews</a>
@@ -416,8 +455,25 @@
                 </div>
             </div>
             
-            <!-- Quinta Geração -->
+            <!-- Game Boy - 4ª Geração -->
             <div class="console-era left-era">
+                <div class="console-card">
+                    <h3 class="era-title">4ª Geração (1989-1998)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Game-Boy-FL.png/320px-Game-Boy-FL.png" alt="Game Boy" class="console-img">
+                    <h4>Game Boy (1989)</h4>
+                    <p>O primeiro portátil de sucesso da Nintendo, com jogos em preto e branco e bateria de longa duração.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">Tetris</a> - Acompanhava o console</li>
+                        <li><a href="#" class="game-link">Pokémon Red/Blue</a> - Iniciou a franquia global</li>
+                        <li><a href="#" class="game-link">The Legend of Zelda: Link's Awakening</a> - Aventura completa no portátil</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Quinta Geração -->
+            <div class="console-era right-era">
                 <div class="console-card">
                     <h3 class="era-title">5ª Geração (1993-2006)</h3>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sony-PlayStation-Console-wController.jpg/320px-Sony-PlayStation-Console-wController.jpg" alt="PlayStation" class="console-img">
@@ -429,6 +485,23 @@
                         <li><a href="#" class="game-link">Final Fantasy VII</a> - Revolucionou os RPGs</li>
                         <li><a href="#" class="game-link">Metal Gear Solid</a> - Pioneiro nos jogos stealth</li>
                         <li><a href="#" class="game-link">Resident Evil</a> - Popularizou o survival horror</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Game Boy Color - 5ª Geração -->
+            <div class="console-era left-era">
+                <div class="console-card">
+                    <h3 class="era-title">5ª Geração (1998-2001)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Game-Boy-Color-Purple-FL.jpg/320px-Game-Boy-Color-Purple-FL.jpg" alt="Game Boy Color" class="console-img">
+                    <h4>Game Boy Color (1998)</h4>
+                    <p>Evolução do Game Boy com tela colorida e hardware mais potente.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">Pokémon Gold/Silver</a> - Sequência inovadora</li>
+                        <li><a href="#" class="game-link">The Legend of Zelda: Oracle of Ages/Seasons</a> - Duologia conectada</li>
+                        <li><a href="#" class="game-link">Super Mario Bros. Deluxe</a> - Remake do clássico NES</li>
                     </ul>
                 </div>
             </div>
@@ -450,6 +523,40 @@
                 </div>
             </div>
             
+            <!-- Game Boy Advance - 6ª Geração -->
+            <div class="console-era left-era">
+                <div class="console-card">
+                    <h3 class="era-title">6ª Geração (2001-2003)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Nintendo-Game-Boy-Advance-Purple-FL.jpg/320px-Nintendo-Game-Boy-Advance-Purple-FL.jpg" alt="Game Boy Advance" class="console-img">
+                    <h4>Game Boy Advance (2001)</h4>
+                    <p>Potência similar ao SNES em um portátil, com gráficos 32-bit.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">Metroid Fusion</a> - Jogo aclamado da franquia</li>
+                        <li><a href="#" class="game-link">The Legend of Zelda: The Minish Cap</a> - Exclusivo do portátil</li>
+                        <li><a href="#" class="game-link">Pokémon Ruby/Sapphire</a> - Primeira geração em GBA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Game Boy Advance SP - 6ª Geração -->
+            <div class="console-era right-era">
+                <div class="console-card">
+                    <h3 class="era-title">6ª Geração (2003-2005)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Game-Boy-Advance-SP-Blue-FL.jpg/320px-Game-Boy-Advance-SP-Blue-FL.jpg" alt="Game Boy Advance SP" class="console-img">
+                    <h4>Game Boy Advance SP (2003)</h4>
+                    <p>Redesign do GBA com formato "clamshell", tela iluminada e bateria recarregável.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">Pokémon FireRed/LeafGreen</a> - Remakes da primeira geração</li>
+                        <li><a href="#" class="game-link">Mario & Luigi: Superstar Saga</a> - RPG inovador</li>
+                        <li><a href="#" class="game-link">Final Fantasy Tactics Advance</a> - Estratégia profunda</li>
+                    </ul>
+                </div>
+            </div>
+            
             <!-- Sétima Geração -->
             <div class="console-era left-era">
                 <div class="console-card">
@@ -466,9 +573,26 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Nintendo DS - 7ª Geração -->
+            <div class="console-era right-era">
+                <div class="console-card">
+                    <h3 class="era-title">7ª Geração (2004-2009)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Nintendo-DS-Fat-Blue.png/320px-Nintendo-DS-Fat-Blue.png" alt="Nintendo DS" class="console-img">
+                    <h4>Nintendo DS (2004)</h4>
+                    <p>Primeiro console com duas telas, sendo uma sensível ao toque, e microfone integrado.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">Nintendogs</a> - Demonstrou o potencial do console</li>
+                        <li><a href="#" class="game-link">New Super Mario Bros.</a> - Retorno ao estilo 2D</li>
+                        <li><a href="#" class="game-link">Pokémon Diamond/Pearl</a> - Primeira geração em DS</li>
+                    </ul>
+                </div>
+            </div>
             
             <!-- Oitava Geração -->
-            <div class="console-era right-era">
+            <div class="console-era left-era">
                 <div class="console-card">
                     <h3 class="era-title">8ª Geração (2012-2020)</h3>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/PlayStation_4_Pro_Black_Edition.jpg/320px-PlayStation_4_Pro_Black_Edition.jpg" alt="PlayStation 4" class="console-img">
@@ -478,10 +602,63 @@
                     <h5 class="mt-4">Jogos Notáveis:</h5>
                     <ul class="game-list">
                         <li><a href="#" class="game-link">The Last of Us Part II</a> - Narrativa madura</li>
-                        <li><a href="god_of_war2018.html" class = "game-link">God of War (2018)</a> - Reinvenção da franquia</li>
-                        <li><a href="god_of_war_Ragnarok.html" class="game-link"> god of war Ragnarok (2018)</a> - continuação da reinvenção</li>
-                        <li><a href="horizon_zero_dawn.html" class="game-link">Horizon Zero Dawn  </a> - Mundo aberto único</li>
-                        <li><a href="horizon2.html" class="game-link">horizon Forbidden West </a> - Continuação épica</li>
+                        <li><a href="god_of_war2018.html" class="game-link">God of War (2018)</a> - Reinvenção da franquia</li>
+                        <li><a href="god_of_war_Ragnarok.html" class="game-link">God of War Ragnarök</a> - Continuação épica</li>
+                        <li><a href="horizon_zero_dawn.html" class="game-link">Horizon Zero Dawn</a> - Mundo aberto único</li>
+                        <li><a href="horizon2.html" class="game-link">Horizon Forbidden West</a> - Continuação da aventura</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Nintendo 3DS - 8ª Geração -->
+            <div class="console-era right-era">
+                <div class="console-card">
+                    <h3 class="era-title">8ª Geração (2011-2017)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Nintendo-3DS-AquaOpen.png/320px-Nintendo-3DS-AquaOpen.png" alt="Nintendo 3DS" class="console-img">
+                    <h4>Nintendo 3DS (2011)</h4>
+                    <p>Evolução do DS com efeito 3D estereoscópico sem óculos e processamento mais potente.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">The Legend of Zelda: A Link Between Worlds</a> - Sequência espiritual de ALttP</li>
+                        <li><a href="#" class="game-link">Pokémon X/Y</a> - Primeiros jogos principais em 3D</li>
+                        <li><a href="#" class="game-link">Super Mario 3D Land</a> - Mario 3D otimizado para portátil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- New Nintendo 3DS - 8ª Geração -->
+            <div class="console-era left-era">
+                <div class="console-card">
+                    <h3 class="era-title">8ª Geração (2014-2017)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/New-Nintendo-3DS-XL-Open.jpg/320px-New-Nintendo-3DS-XL-Open.jpg" alt="New Nintendo 3DS" class="console-img">
+                    <h4>New Nintendo 3DS (2014)</h4>
+                    <p>Versão melhorada com processador mais rápido, c-stick e botões ZL/ZR adicionais.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">Xenoblade Chronicles 3D</a> - Port do RPG de Wii</li>
+                        <li><a href="#" class="game-link">Fire Emblem Fates</a> - Estratégia profunda</li>
+                        <li><a href="#" class="game-link">The Legend of Zelda: Majora's Mask 3D</a> - Remake do clássico N64</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Nintendo Switch na Oitava Geração -->
+            <div class="console-era right-era">
+                <div class="console-card">
+                    <h3 class="era-title">8ª Geração (2017-2020)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Nintendo-Switch-Console-Docked-wJoyConRB.jpg/320px-Nintendo-Switch-Console-Docked-wJoyConRB.jpg" alt="Nintendo Switch" class="console-img">
+                    <h4>Nintendo Switch (2017)</h4>
+                    <p>Console híbrido que pode ser usado como portátil ou conectado à TV, com controles Joy-Con inovadores.</p>
+                    
+                    <h5 class="mt-4">Jogos Notáveis:</h5>
+                    <ul class="game-list">
+                        <li><a href="#" class="game-link">The Legend of Zelda: Breath of the Wild</a> - Revolucionou a franquia</li>
+                        <li><a href="#" class="game-link">Super Mario Odyssey</a> - Evolução dos jogos 3D de Mario</li>
+                        <li><a href="#" class="game-link">Animal Crossing: New Horizons</a> - Fenômeno social</li>
+                        <li><a href="#" class="game-link">Super Smash Bros. Ultimate</a> - O crossover definitivo</li>
+                        <li><a href="#" class="game-link">Pokémon Sword/Shield</a> - Primeiros jogos principais de Pokémon no Switch</li>
                     </ul>
                 </div>
             </div>
@@ -499,6 +676,25 @@
                         <li><a href="#" class="game-link">Demon's Souls</a> - Remake de um clássico</li>
                         <li><a href="#" class="game-link">Ratchet & Clank: Rift Apart</a> - Mostra o poder do SSD</li>
                         <li><a href="#" class="game-link">Returnal</a> - Roguelike de alta qualidade</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Nintendo Switch 2 (Próxima Geração) -->
+            <div class="console-era right-era">
+                <div class="console-card">
+                    <h3 class="era-title">9ª Geração (2025?)</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Nintendo-Switch-Console-Docked-wJoyConRB.jpg/320px-Nintendo-Switch-Console-Docked-wJoyConRB.jpg" alt="Nintendo Switch 2" class="console-img">
+                    <h4>Nintendo Switch 2</h4>
+                    <p>Sucessor do Switch com hardware mais potente, retrocompatibilidade e possivelmente suporte a 4K. Ainda não confirmado oficialmente pela Nintendo, mas amplamente especulado pela indústria.</p>
+                    
+                    <h5 class="mt-4">Expectativas:</h5>
+                    <ul class="game-list">
+                        <li>Melhor desempenho para jogos atuais</li>
+                        <li>Possível suporte a ray tracing</li>
+                        <li>Retrocompatibilidade com jogos do Switch</li>
+                        <li>Tela OLED melhorada (nos modelos portáteis)</li>
+                        <li>Novos acessórios e inovações nos controles</li>
                     </ul>
                 </div>
             </div>
@@ -558,6 +754,7 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = 1;
                     entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
